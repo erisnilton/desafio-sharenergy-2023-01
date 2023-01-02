@@ -1,25 +1,33 @@
-import { Customer } from './domain/customer/customer.entity';
-import { Address } from './domain/_shared/value-object/address.vo';
-import { Cpf } from './domain/_shared/value-object/cpf.vo';
-import { Email } from './domain/_shared/value-object/email.vo';
-import { Phone } from './domain/_shared/value-object/phone.vo';
+import {
+  FindAllCustomersCommand,
+  FindAllCustomersHandler,
+} from './application/customer/story/find-all-customers.story';
+import {
+  CreateCustomerCommand,
+  CreateCustomerHandler,
+} from './application/customer/story/create-customer.story';
+import { MongoClient, ServerApiVersion } from 'mongodb';
+import { MongoDBCustomerRepository } from './infra/mongo-db/customer/customer.repository';
+import {
+  UpdateCustomerHandler,
+  UpdateCustomerCommand,
+} from './application/customer/story/update-customer.story';
+import {
+  DeleteCustomerCommand,
+  DeleteCustomerHandler,
+} from './application/customer/story/delete-customer.story';
 
-const customer = Customer.create({
-  name: 'John Doe',
-  email: Email.of('jd@email.com'),
-  phone: Phone.of('88993326479'),
-  address: Address.of({
-    street: 'Rua A',
-    number: '123',
-    complement: 'Complement',
-    neighborhood: 'Centro',
-    city: 'Morada Nova',
-    state: 'Ceará',
-    country: 'Brasil',
-    zipCode: '62940000',
-    reference: 'Reference',
-  }),
-  cpf: Cpf.of('55235833082'),
-});
+const mongoClient = new MongoClient(
+  'mongodb+srv://desafiosharenergy:sh4r3n3rgy@cluster0.kvpwh04.mongodb.net/?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverApi: ServerApiVersion.v1,
+  } as any,
+);
 
-console.log(customer);
+const repo = new MongoDBCustomerRepository(mongoClient);
+  
+new FindAllCustomersHandler(repo)
+  .execute(new FindAllCustomersCommand())
+  .then(console.log);

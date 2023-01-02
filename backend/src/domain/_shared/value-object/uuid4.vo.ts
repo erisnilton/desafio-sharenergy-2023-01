@@ -19,6 +19,9 @@ export class UUID4 extends Id<string> {
   }
 
   [inspect.custom](_, options): string {
-    return options.stylize(`${this.constructor.name}(${this.id})`, 'special');
+    return options.stylize(
+      `${this.constructor.name}(${this.value})`,
+      'special',
+    );
   }
 }

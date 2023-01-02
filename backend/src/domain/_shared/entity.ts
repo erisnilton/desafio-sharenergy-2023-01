@@ -28,4 +28,11 @@ export abstract class Entity<T extends EntityFields> {
     fields.updated_at ??= fields.created_at;
     Object.assign(this, fields);
   }
+
+  assign(fields: T) {
+    for (const [key, value] of Object.entries(fields)) {
+      if (value !== undefined) this[key] = value;
+    }
+    this.updated_at = new Date();
+  }
 }
