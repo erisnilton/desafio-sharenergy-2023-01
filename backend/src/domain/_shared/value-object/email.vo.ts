@@ -1,3 +1,4 @@
+import { ValidationError } from './../errors/validation-error';
 import { inspect } from 'util';
 import { ValueObject } from '../value-object';
 export class Email implements ValueObject {
@@ -18,13 +19,13 @@ export class Email implements ValueObject {
     return this.#value;
   }
   static of(email: string) {
-    if (!email) throw new Error('Email is required');
+    if (!email) throw ValidationError.of('Email is required');
     if (
       !email.match(
         /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/i,
       )
     ) {
-      throw new Error('Email is invalid');
+      throw ValidationError.of('Email is invalid');
     }
     return new Email(email);
   }

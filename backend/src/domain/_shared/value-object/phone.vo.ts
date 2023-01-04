@@ -1,3 +1,4 @@
+import { ValidationError } from './../errors/validation-error';
 import { inspect } from 'util';
 import { ValueObject } from '../value-object';
 export class Phone implements ValueObject {
@@ -29,10 +30,10 @@ export class Phone implements ValueObject {
   }
 
   static of(phone: string) {
-    if (!phone) throw new Error('Phone is required');
+    if (!phone) throw ValidationError.of('Phone is required');
     phone = phone.replace(/\D/g, '');
     if (phone.length < 10 || phone.length > 11) {
-      throw new Error('Phone is invalid');
+      throw ValidationError.of('Phone is invalid');
     }
     return new Phone(phone);
   }

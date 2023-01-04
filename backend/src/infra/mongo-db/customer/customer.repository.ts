@@ -1,3 +1,4 @@
+import { Paged, PagedParams } from './../../../domain/_shared/paged';
 import { Customer } from 'src/domain/customer/customer.entity';
 import { Id } from 'src/domain/_shared/value-object/id.vo';
 import { CustomerRepository } from '../../../application/customer/customer.repository';
@@ -5,6 +6,7 @@ import { CustomerRepository } from '../../../application/customer/customer.repos
 import { MongoClient } from 'mongodb';
 
 import * as CustomerMapper from './customer.mapper';
+import { EntityNotFoundError } from 'src/domain/_shared/errors/entity-not-found-error';
 
 export class MongoDBCustomerRepository implements CustomerRepository {
   constructor(readonly mongoClient: MongoClient) {}
@@ -25,13 +27,18 @@ export class MongoDBCustomerRepository implements CustomerRepository {
   async findByIdOrFail(id: Id<any>): Promise<Customer> {
     const customer = await this.collection.findOne({ _id: id.value });
     if (!customer) {
-      throw new Error('Customer not found');
+      throw EntityNotFoundError.ofId(Customer, id);
     }
     return CustomerMapper.fromDb(customer);
   }
-  async findAll(): Promise<Customer[]> {
-    const customers = await this.collection.find().toArray();
-    return customers.map(CustomerMapper.fromDb);
+  async findAll(pagination: PagedParams): Promise<Paged<Customer>> {
+    const [total, customers] = await Promise.all([
+      this.collection.countDocuments(),
+      this.collection
+        .aggregate([{ $skip: pagination.offset }, { $limit: pagination.limit }])
+        .toArray(),
+    ]);
+    return Paged.of(customers.map(CustomerMapper.fromDb), total, pagination);
   }
   async delete(customer: Customer): Promise<void> {
     await this.collection.deleteOne({ _id: customer.id.value });

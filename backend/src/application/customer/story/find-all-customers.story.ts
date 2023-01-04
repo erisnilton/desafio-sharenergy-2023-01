@@ -1,19 +1,27 @@
+import { Paged, PagedParams } from './../../../domain/_shared/paged';
 import { Customer } from '../../../domain/customer/customer.entity';
 import {
-  Command,
+  CommandData,
   CommandHandler,
 } from '../../../domain/_shared/commad-handler';
 
 import { CustomerRepository } from '../customer.repository';
 
-export class FindAllCustomersCommand extends Command {}
+export namespace FindAllCustomers {
+  export class Command extends CommandData {
+    pagination: PagedParams;
 
-export class FindAllCustomersHandler
-  implements CommandHandler<FindAllCustomersCommand>
-{
-  constructor(private readonly customerRepository: CustomerRepository) {}
+    constructor({ pagination }: { pagination: PagedParams }) {
+      super();
+      this.pagination = pagination;
+    }
+  }
 
-  async execute(command: FindAllCustomersCommand): Promise<Customer[]> {
-    return await this.customerRepository.findAll();
+  export class Handler implements CommandHandler<Command> {
+    constructor(private readonly customerRepository: CustomerRepository) {}
+
+    async execute(command: Command): Promise<Paged<Customer>> {
+      return await this.customerRepository.findAll(command.pagination);
+    }
   }
 }

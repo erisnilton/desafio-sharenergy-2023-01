@@ -1,3 +1,4 @@
+import { ValidationError } from './../errors/validation-error';
 import { inspect } from 'util';
 import { ValueObject } from '../value-object';
 
@@ -44,14 +45,15 @@ export class Address implements ValueObject {
   }
 
   static of(address: AddressFields) {
-    if (!address) throw new Error('Address is required');
-    if (!address.street) throw new Error('Street is required');
-    if (!address.number) throw new Error('Number is required');
-    if (!address.neighborhood) throw new Error('Neighborhood is required');
-    if (!address.city) throw new Error('City is required');
-    if (!address.state) throw new Error('State is required');
-    if (!address.country) throw new Error('Country is required');
-    if (!address.zipCode) throw new Error('ZipCode is required');
+    if (!address) throw ValidationError.of('Address is required');
+    if (!address.street) throw ValidationError.of('Street is required');
+    if (!address.number) throw ValidationError.of('Number is required');
+    if (!address.neighborhood)
+      throw ValidationError.of('Neighborhood is required');
+    if (!address.city) throw ValidationError.of('City is required');
+    if (!address.state) throw ValidationError.of('State is required');
+    if (!address.country) throw ValidationError.of('Country is required');
+    if (!address.zipCode) throw ValidationError.of('ZipCode is required');
 
     return new Address(address);
   }

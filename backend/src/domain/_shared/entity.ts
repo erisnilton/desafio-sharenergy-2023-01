@@ -1,3 +1,4 @@
+import { ValidationError } from './errors/validation-error';
 import { Id } from './value-object/id.vo';
 import { UUID4 } from './value-object/uuid4.vo';
 
@@ -13,11 +14,11 @@ export abstract class Entity<T extends EntityFields> {
   updated_at: Date;
 
   validate() {
-    if (!(this.id instanceof Id)) throw new Error('Invalid id');
+    if (!(this.id instanceof Id)) throw ValidationError.of('Invalid id');
     if (!(this.created_at instanceof Date))
-      throw new Error('Invalid created_at');
+      throw ValidationError.of('created_at is not a date');
     if (!(this.updated_at instanceof Date))
-      throw new Error('Invalid updated_at');
+      throw ValidationError.of('created_at is not a date');
 
     return true;
   }

@@ -1,3 +1,4 @@
+import { ValidationError } from './../errors/validation-error';
 import { ValueObject } from '../value-object';
 import { inspect } from 'util';
 
@@ -54,13 +55,17 @@ export class Cpf implements ValueObject {
     );
   }
 
+  toString(): string {
+    return this.formatted;
+  }
+
   static of(cpf: string) {
+    cpf ??= '';
     cpf = cpf.replace(/\D/g, '');
 
     if (!Cpf.isValid(cpf)) {
-      throw new TypeError('Invalid cpf!');
+      throw ValidationError.of('Invalid cpf!');
     }
-
     return new Cpf(cpf);
   }
 }

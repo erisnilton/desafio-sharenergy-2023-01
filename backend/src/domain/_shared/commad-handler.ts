@@ -1,5 +1,5 @@
-export abstract class Command {}
+export abstract class CommandData {}
 
-export interface CommandHandler<T extends Command, R = any> {
+export interface CommandHandler<T extends CommandData, R = any> {
   execute(command: T): Promise<R>;
 }

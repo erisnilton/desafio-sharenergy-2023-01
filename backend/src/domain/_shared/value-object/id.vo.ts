@@ -1,3 +1,4 @@
+import { ValidationError } from './../errors/validation-error';
 import { ValueObject } from '../value-object';
 
 export abstract class Id<T = any> implements ValueObject {
@@ -9,7 +10,7 @@ export abstract class Id<T = any> implements ValueObject {
 
   protected constructor(id: T) {
     if (id === null || id === undefined) {
-      throw new Error('Id cannot be null or undefined');
+      throw ValidationError.of('Id cannot be null or undefined');
     }
     this.#value = id;
   }

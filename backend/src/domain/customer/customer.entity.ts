@@ -1,3 +1,4 @@
+import { ValidationError } from './../_shared/errors/validation-error';
 import { Entity, EntityFields } from '../_shared/entity';
 import { Address } from '../_shared/value-object/address.vo';
 import { Cpf } from '../_shared/value-object/cpf.vo';
@@ -27,11 +28,14 @@ export class Customer extends Entity<CustomerFields> {
 
   validate(): boolean {
     super.validate();
-    if (!this.name) throw new Error('Invalid name');
-    if (!(this.cpf instanceof Cpf)) throw new Error('Invalid cpf');
-    if (!(this.address instanceof Address)) throw new Error('Invalid address');
-    if (!(this.email instanceof Email)) throw new Error('Invalid email');
-    if (!(this.phone instanceof Phone)) throw new Error('Invalid phone');
+    if (!this.name) throw ValidationError.of('Invalid name');
+    if (!(this.cpf instanceof Cpf)) throw ValidationError.of('Invalid cpf');
+    if (!(this.address instanceof Address))
+      throw ValidationError.of('Invalid address');
+    if (!(this.email instanceof Email))
+      throw ValidationError.of('Invalid email');
+    if (!(this.phone instanceof Phone))
+      throw ValidationError.of('Invalid phone');
     return true;
   }
 }
