@@ -21,6 +21,7 @@ export namespace FindAllCustomers {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async execute(command: Command): Promise<Paged<Customer>> {
+      console.log('Retornando todos os clientes', command.pagination);
       return await this.customerRepository.findAll(command.pagination);
     }
   }

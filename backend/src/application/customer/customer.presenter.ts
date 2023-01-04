@@ -3,8 +3,6 @@ import { Paged } from 'src/domain/_shared/paged';
 
 export namespace CustomerPresenter {
   export function present(customer: Customer | Paged<Customer>) {
-    console.log('customer', customer);
-
     if (customer instanceof Paged) {
       return new Paged(
         customer.items.map(present),

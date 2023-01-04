@@ -45,6 +45,7 @@ export namespace CreateCustomer {
         address: Address.of(command.address),
         cpf: Cpf.of(command.cpf),
       });
+      console.log('Cadastrando cliente: ', customer);
       return this.customerRepository.create(customer);
     }
   }

@@ -17,9 +17,11 @@ export namespace DeleteCustomer {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async execute(command: Command): Promise<void> {
+      console.log('Verificando se o cliente existe: ', command.id);
       const customer = await this.customerRepository.findByIdOrFail(
         UUID4.of(command.id),
       );
+      console.log('Deletando cliente: ', customer);
       return this.customerRepository.delete(customer);
     }
   }

@@ -42,9 +42,12 @@ export namespace UpdateCustomer {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async execute(command: Command): Promise<Customer> {
+      console.log('Verificando se o cliente existe: ', command.id);
       const customer = await this.customerRepository.findByIdOrFail(
         UUID4.of(command.id),
       );
+
+      console.log('Atualizando cliente: ', customer);
 
       customer.assign({
         name: command.name,
@@ -53,7 +56,7 @@ export namespace UpdateCustomer {
         address: command.address ? Address.of(command.address) : undefined,
         cpf: command.cpf ? Cpf.of(command.cpf) : undefined,
       });
-
+      console.log('Salvando alteraçoes do  cliente: ', customer);
       return this.customerRepository.update(customer);
     }
   }

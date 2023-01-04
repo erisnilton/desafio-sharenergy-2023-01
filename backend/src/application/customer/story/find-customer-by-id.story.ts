@@ -18,9 +18,11 @@ export namespace FindCustomerById {
     constructor(private readonly customerRepository: CustomerRepository) {}
 
     async execute(command: Command): Promise<Customer> {
+      console.log('Verificando se o cliente existe: ', command.id);
       const customer = await this.customerRepository.findByIdOrFail(
         UUID4.of(command.id),
       );
+      console.log('Retornando cliente: ', customer);
       return customer;
     }
   }
