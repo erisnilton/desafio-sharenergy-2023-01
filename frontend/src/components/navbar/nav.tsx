@@ -1,5 +1,5 @@
 import { makeStyles, Tooltip } from "@material-ui/core";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { logout } from "../../services/login";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useEffect, useState } from "react";
@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
+  },
+  active: {
+    color: theme.palette.action.hover,
   },
   profile: {
     display: "flex",
@@ -72,14 +75,22 @@ const Nav: React.FunctionComponent = () => {
     const menu = getMenus();
     setMenus(menu.items);
   }, []);
+
+  let activeStyle = {};
   return (
     <>
       <nav className={classes.nav}>
         <ul>
           {menus.map((item: any) => (
             <li key={item.id}>
-              <Link to={item.to}>{item.label}</Link>
-              </li>
+              <NavLink to={item.to}>
+                {({ isActive }) => (
+                  <div className={isActive ? `${classes.active}` : undefined}>
+                    {item.label}
+                  </div>
+                )}
+              </NavLink>
+            </li>
           ))}
         </ul>
       </nav>

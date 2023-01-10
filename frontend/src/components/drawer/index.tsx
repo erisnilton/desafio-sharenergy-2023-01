@@ -6,36 +6,71 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 
 import { logout } from "../../services/login";
 import Divider from "@material-ui/core/Divider";
 import { getMenus } from "../../utils/menu";
+import Avatar from "@material-ui/core/Avatar";
+import { LOGO_URL as logo } from "../../utils/menu";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   list: {
-    width: 300,
-    marginTop: 50,
-    marginLeft: 50,
+    width: 250,
+    margin: theme.spacing(4, 4),
   },
   menu: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    marginBottom: 30,
+    marginBottom: theme.spacing(4),
   },
   listItem: {
-    padding: 10,
+    padding: theme.spacing(2, 0),
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+  profile: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginBottom: theme.spacing(4),
 
-    "&:hover": {
-      backgroundColor: "#f5f5f5",
+    "& span": {
+      marginLeft: 10,
+      fontSize: 16,
+      fontWeight: 600,
+      textTransform: "uppercase",
     },
   },
-});
+  logout: {
+    display: "flex",
+    width: "100%",
+  },
+  link: {
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+
+    "& span": {
+      marginLeft: 10,
+      fontSize: 14,
+      fontWeight: 500,
+      color: theme.palette.common.black,
+    },
+  },
+  divider: {
+    width: "100%",
+  },
+}));
 export default function DrawerLeft() {
   const [state, setState] = React.useState(false);
   const classes = useStyles();
   const navigate = useNavigate();
+  const username = localStorage.getItem("username");
 
   const menus = getMenus();
 
@@ -52,22 +87,6 @@ export default function DrawerLeft() {
       setState(open);
     };
 
-  const handleClick = (label: string) => {
-    if (label === "Random User") {
-      navigate("/");
-    }
-    if (label === "Random Dogs") {
-      navigate("/random-dog");
-    }
-
-    if (label === "HTTP Cat") {
-      navigate("/http-cat");
-    }
-    if (label === "Customer") {
-      navigate("/customer");
-    }
-  };
-
   const list = () => (
     <div
       className={classes.list}
@@ -75,30 +94,38 @@ export default function DrawerLeft() {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
+      <div className={classes.profile}>
+        <Avatar alt="Remy Sharp" src={logo} className={classes.large} />
+        <span>{username}</span>
+      </div>
+      <Divider className={classes.divider} />
       <List className={classes.menu}>
         {menus.items.map((item) => (
-          <ListItem
-            className={classes.listItem}
-            button
-            key={item.id}
-            onClick={() => handleClick(item.label)}
-          >
-            <ListItemText primary={item.label} />
-          </ListItem>
+          <div className={classes.listItem} key={item.id}>
+            <NavLink className={classes.link} to={item.to}>
+                <Avatar>{item.label.at(0)}</Avatar>
+                <span>{item.label}</span>
+            </NavLink>
+          </div>
         ))}
       </List>
-      <Divider style={{ marginLeft: -50 }} />
+      <Divider className={classes.divider} />
       <List className={classes.menu}>
-        <ListItem
-          className={classes.listItem}
-          button
-          key="Logout"
-          onClick={() => {
-            logout();
-            navigate("/login");
-          }}
-        >
-          <ListItemText primary="Sair" />
+        <ListItem className={classes.listItem}>
+          <div className={classes.logout}>
+            <Link
+              className={classes.link}
+              to={"/login"}
+              onClick={() => {
+                logout();
+              }}
+            >
+              <Avatar>
+                <ExitToAppIcon />
+              </Avatar>
+              <span>Sair</span>
+            </Link>
+          </div>
         </ListItem>
       </List>
     </div>

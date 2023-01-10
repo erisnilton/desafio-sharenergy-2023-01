@@ -4,27 +4,25 @@ export function getMenus() {
       {
         id: 1,
         label: "Random User",
-        icon: "pi pi-fw pi-home",
         to: "/",
       },
       {
         id: 2,
         label: "Random Dogs",
-        icon: "pi pi-fw pi-home",
         to: "/random-dog",
       },
       {
         id: 3,
         label: "HTTP Cat",
-        icon: "pi pi-fw pi-home",
         to: "/http-cat",
       },
       {
         id: 4,
         label: "Customer",
-        icon: "pi pi-fw pi-home",
         to: "/customer",
       },
     ],
   };
 }
+
+export const LOGO_URL = "https://www.sharenergy.com.br/wp-content/uploads/2022/12/logo_color.png"

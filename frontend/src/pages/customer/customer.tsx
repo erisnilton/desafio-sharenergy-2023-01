@@ -29,6 +29,7 @@ import { Customer } from "../../model/customer";
 import ConfirmDialog from "../../components/confirm-dialog";
 import CustomerDetails from "../details";
 import Tooltip from "@material-ui/core/Tooltip";
+import { toast } from "react-toastify";
 
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -92,6 +93,13 @@ const Costumer: React.FunctionComponent = () => {
       customerService.insertCustomer(customer).then(() => {
         setOpenPopup(false);
         setChange(!change);
+        toast.success("Cliente Cadastrado com sucesso!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }).catch((err) => {
+        toast.error("Erro ao cadastrar cliente!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
     } else {
       customerService.updateCostumer(customer).then(() => {
@@ -99,6 +107,13 @@ const Costumer: React.FunctionComponent = () => {
         setRecordForEdit(null);
         setOpenPopup(false);
         setChange(!change);
+        toast.success("Cliente Atualizado com sucesso!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }).catch((err) => {
+        toast.error("Erro ao atualizar cliente!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
     }
   };

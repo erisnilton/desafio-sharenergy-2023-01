@@ -1,5 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { LOGO_URL as logo } from "../../utils/menu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,7 @@ const Title: React.FunctionComponent = () => {
     <Link to={"/"}>
       <Typography className={classes.root}>
         <img
-          src="https://www.sharenergy.com.br/wp-content/uploads/2022/12/logo_color.png"
+          src={logo}
           alt="logo"
           className={classes.logo}
         />
