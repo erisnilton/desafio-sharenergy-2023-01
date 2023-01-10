@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PeopleIcon from "@material-ui/icons/People";
 import {
   withStyles,
   Theme,
@@ -16,21 +15,13 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import CloseIcon from "@material-ui/icons/Close";
-import Search from "@material-ui/icons/Search";
 import AddIcon from "@material-ui/icons/Add";
 import InfoIcon from "@material-ui/icons/Info";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import PageHeader from "../../components/page-header";
 import Navbar from "../../components/navbar";
 import { Authenticated } from "../../components/Authenticated/Authenticated";
-import { getCustumers } from "../../api";
-import Input from "../../components/input";
 import Button from "../../components/button";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePaginationActions from "@material-ui/core/TablePagination/TablePaginationActions";
 import Popup from "../../components/popup";
 import CustomerForm from "./customerForm";
 import * as customerService from "../../services/customerService";
@@ -65,14 +56,19 @@ const useStyles = makeStyles((theme) => ({
   pageContent: {
     width: "100%",
     marginTop: theme.spacing(3),
-    padding: theme.spacing(3),
+    padding: theme.spacing(3)
+  },
+  container: {
+    width: "100%",
+
+    [theme.breakpoints.down("sm")]: {
+      padding:0,
+      width: "100%",
+    }
   },
   newButton: {
     position: "absolute",
-    right: "10px",
-  },
-  table: {
-    minWidth: 700,
+    right: 0,
   },
 }));
 
@@ -89,7 +85,7 @@ const Costumer: React.FunctionComponent = () => {
     isOpen: false,
     title: "",
     subTitle: "",
-  });
+  } as any);
 
   const addOrEdit = (customer: any, resetForm: any) => {
     if (customer.id == "") {
@@ -147,8 +143,8 @@ const Costumer: React.FunctionComponent = () => {
             }}
           />
         </Toolbar>
-        <TableContainer component={Paper}>
-          <Table className={classes.table}>
+        <TableContainer component={Paper} className={classes.container}>
+          <Table>
             <TableHead>
               <TableRow>
                 <StyledTableCell>Nome</StyledTableCell>
@@ -213,6 +209,13 @@ const Costumer: React.FunctionComponent = () => {
                   </TableCell>
                 </StyledTableRow>
               ))}
+              { customers.length === 0 && (
+                <StyledTableRow>
+                  <TableCell colSpan={5} align="center">
+                    Nenhum cliente cadastrado
+                  </TableCell>
+                  </StyledTableRow>
+              )}
             </TableBody>
           </Table>
         </TableContainer>

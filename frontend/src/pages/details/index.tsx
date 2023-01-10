@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { findCustumer } from "../../api";
 
@@ -42,31 +40,27 @@ const CustomerDetails = (props: any) => {
 
   return (
     <div className={classes.root}>
-      <Card className={classes.card} elevation={0}>
-        <CardContent>
-          <div className={classes.info}>
-            <p>
-              <strong>ID: </strong> {customer?.id}
-            </p>
-            <p>
-              <strong>Name: </strong>
-              {customer?.name}
-            </p>
-            <p>
-              <strong>Email: </strong>
-              {customer?.email}
-            </p>
-            <p>
-              <strong>Address: </strong>
-              {customer?.address}
-            </p>
-            <p>
-              <strong>Phone: </strong>
-              {customer?.phone}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className={classes.info}>
+        <p>
+          <strong>ID: </strong> {customer?.id}
+        </p>
+        <p>
+          <strong>Name: </strong>
+          {customer?.name}
+        </p>
+        <p>
+          <strong>Email: </strong>
+          {customer?.email}
+        </p>
+        <p>
+          <strong>Address: </strong>
+          {customer?.address}
+        </p>
+        <p>
+          <strong>Phone: </strong>
+          {customer?.phone}
+        </p>
+      </div>
     </div>
   );
 };
