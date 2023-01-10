@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CustomerDetails = (props: string) => {
+const CustomerDetails = (props: any) => {
   const { id } = props;
   const [customer, setCustomer] = useState("" as any);
   const classes = useStyles();
