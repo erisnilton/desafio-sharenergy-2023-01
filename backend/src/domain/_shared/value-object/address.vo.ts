@@ -37,11 +37,11 @@ export class Address implements ValueObject {
   }
 
   toString(): string {
-    return `${this.value.street}, ${this.value.number} - ${
+    return `${this.value.street}, ${this.value.number}, ${
       this.value.neighborhood
-    }, ${this.#value.zipCode}, ${this.value.city} - ${this.value.state}, ${
-      this.value.country
-    }`;
+    },${this.value.complement}, ${this.#value.zipCode}, ${this.value.city}, ${
+      this.value.state
+    }, ${this.value.country},${this.value.reference}`;
   }
 
   static of(address: AddressFields) {
