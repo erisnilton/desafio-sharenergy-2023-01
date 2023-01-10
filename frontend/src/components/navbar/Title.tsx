@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    alignItems: "center",
     cursor: "pointer",
     color: theme.palette.primary.main,
   },
   logo: {
     width: 200,
+    [theme.breakpoints.down("sm")]: {
+      width: 180,
+    }
   },
 }));
 

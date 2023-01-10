@@ -2,38 +2,45 @@ import { AppBar, Grid, makeStyles, Toolbar } from "@material-ui/core";
 import React, { FunctionComponent } from "react";
 import Nav from "./nav";
 import Title from "./Title";
+import DrawerLeft from "../drawer";
+
+import useIsSmallWindows from "../../hooks/useIsSmallWindows";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGlow: 1,
-    marginBottom: theme.spacing(10),
+    marginBottom: theme.spacing(6),
   },
-  grid: {
+  toolbar: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: theme.spacing(0, 2),
+    justifyContent: "space-around",
+
     [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(0, 1),
-    },
+      justifyContent: "flex-start",
+      alignItems: "center",
+    }
   },
 }));
 
 const Navbar: FunctionComponent = () => {
   const classes = useStyles();
 
+  const smallWindow = useIsSmallWindows();
+
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" elevation={0}>
-        <Toolbar>
-          <Grid container className={classes.grid}>
-            <Grid item xs={8}>
+      <AppBar position="fixed" variant="outlined">
+        <Toolbar className={classes.toolbar}>
+          {smallWindow ? (
+            <>
+              <DrawerLeft />
               <Title />
-            </Grid>
-            <Grid item xs={4}>
+            </>
+          ) : (
+            <>
+              <Title />
               <Nav />
-            </Grid>
-          </Grid>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>
