@@ -1,15 +1,26 @@
 import { Button, Grid, makeStyles } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField/TextField";
 import React from "react";
+import { Authenticated } from "../../components/Authenticated/Authenticated";
+import Input from "../../components/input";
+import NavBar from "../../components/navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     display: "flex",
     marginBottom: theme.spacing(2),
+
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
   },
   button: {
     margin: theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(2),
+      width: "100%",
+    },
   },
   input: {
     width: "100%",
@@ -24,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: "10px",
       shadow: "0 0 10px 0 rgba(0,0,0,0.5)",
       transition: "all 0.3s ease",
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
     },
   },
 }));
@@ -46,11 +61,12 @@ const HttpCat: React.FunctionComponent = () => {
   };
   return (
     <div>
+      <NavBar />
       <form className={classes.root} onSubmit={handleSubmit}>
         <div className={classes.input}>
-          <TextField
+          <Input
             className={classes.input}
-            id="standard-basic"
+            name="pequise"
             label="Digite um staus code"
             value={code}
             onChange={handleCode}
@@ -66,7 +82,6 @@ const HttpCat: React.FunctionComponent = () => {
             Pequisar
           </Button>
         </div>
-        <div></div>
       </form>
       <div className={classes.containerImg}>
         {result && <img src={image} alt="HttpCat" />}
@@ -75,4 +90,4 @@ const HttpCat: React.FunctionComponent = () => {
   );
 };
 
-export default HttpCat;
+export default Authenticated(HttpCat);
