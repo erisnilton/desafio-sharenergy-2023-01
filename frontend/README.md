@@ -19,6 +19,7 @@ Construir uma aplicação web (frontend e backend) capaz de realizar a comunica�
 |       NodeJS        | 18.12.1  |
 |        Yarn         | 1.22.19  |
 |       Material UI   |  4.12.4  |
+|    react-toastify   |  9.1.1   |
 |       VsCode        |  1.70.2  |
 |    Google Chrome    |   106    |
 
