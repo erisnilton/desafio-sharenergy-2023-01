@@ -2,8 +2,8 @@ import { makeStyles, Tooltip } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../services/login";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { getMenus } from "../utils/menu";
 import { useEffect, useState } from "react";
+import { getMenus } from "../../utils/menu";
 
 const useStyles = makeStyles((theme) => ({
   nav: {
