@@ -1,3 +1,29 @@
+# Instruções
+
+### Link do Video
+
+https://youtu.be/fTm329fdOBQ
+
+### Link do Repositório
+https://github.com/erisnilton/desafio-sharenergy-2023-01
+#
+### Back end
+acesse a pasta backend
+
+```bash
+cd backend
+```
+No readme do backend tem as instruções para rodar o projeto
+
+### Front end
+acesse a pasta frontend
+```bash
+cd frontend
+```
+
+No readme do frontend tem as instruções para rodar o projeto
+#
+
 # Desafio para o processo seletivo SHARENERGY 2023/01
 
 Repositório destinado aos interessados em participar do processo seletivo da SHARENERGY 2023/01. As vagas são voltadas para desenvolvimento de aplicações Web e Mobile.
