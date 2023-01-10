@@ -1,6 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import "./App.css";
-import Navbar from "./components/navbar";
 import theme from "./theme";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -10,7 +9,8 @@ import RandomDog from "./pages/random-dog";
 import Customer from "./pages/customer/customer";
 import LoginForm from "./pages/login/Loginorm";
 import CustomerDetails from "./pages/details";
-import CustomerForm from "./pages/customer/customerForm";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </ThemeProvider>
+      <ToastContainer autoClose={3000} />
     </BrowserRouter>
   );
 }
