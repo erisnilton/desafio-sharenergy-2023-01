@@ -10,9 +10,9 @@ import { Link, useNavigate, NavLink } from "react-router-dom";
 
 import { logout } from "../../services/login";
 import Divider from "@material-ui/core/Divider";
-import { getMenus } from "../../utils/menu";
+import { getMenus } from "../../utils";
 import Avatar from "@material-ui/core/Avatar";
-import { LOGO_URL as logo } from "../../utils/menu";
+import { LOGO_URL as logo } from "../../utils";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const useStyles = makeStyles((theme) => ({

@@ -3,7 +3,7 @@ import { Link, useNavigate, NavLink } from "react-router-dom";
 import { logout } from "../../services/login";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useEffect, useState } from "react";
-import { getMenus } from "../../utils/menu";
+import { getMenus } from "../../utils";
 
 const useStyles = makeStyles((theme) => ({
   nav: {

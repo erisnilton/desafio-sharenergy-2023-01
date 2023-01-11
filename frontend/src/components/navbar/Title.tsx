@@ -1,6 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { LOGO_URL as logo } from "../../utils/menu";
+import { LOGO_URL as logo } from "../../utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
