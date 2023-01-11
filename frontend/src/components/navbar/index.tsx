@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-around",
 
     [theme.breakpoints.down("sm")]: {
-      justifyContent: "flex-start",
-      alignItems: "center",
-    }
+      flexDirection: "row-reverse",
+      alignSelf: "flex-start",
+    },
   },
 }));
 
@@ -30,17 +30,8 @@ const Navbar: FunctionComponent = () => {
     <div className={classes.root}>
       <AppBar position="fixed" variant="outlined">
         <Toolbar className={classes.toolbar}>
-          {smallWindow ? (
-            <>
-              <DrawerLeft />
-              <Title />
-            </>
-          ) : (
-            <>
-              <Title />
-              <Nav />
-            </>
-          )}
+          <Title />
+          {smallWindow ? <DrawerLeft /> : <Nav />}
         </Toolbar>
       </AppBar>
     </div>

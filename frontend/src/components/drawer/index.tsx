@@ -103,8 +103,8 @@ export default function DrawerLeft() {
         {menus.items.map((item) => (
           <div className={classes.listItem} key={item.id}>
             <NavLink className={classes.link} to={item.to}>
-                <Avatar>{item.label.at(0)}</Avatar>
-                <span>{item.label}</span>
+              <Avatar>{item.label.at(0)}</Avatar>
+              <span>{item.label}</span>
             </NavLink>
           </div>
         ))}
@@ -137,7 +137,6 @@ export default function DrawerLeft() {
         color="primary"
         aria-label="open drawer"
         onClick={toggleDrawer(true)}
-        edge="start"
       >
         <MenuIcon style={{ fontSize: "2.2rem" }} />
       </IconButton>

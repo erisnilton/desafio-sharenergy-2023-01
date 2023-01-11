@@ -57,7 +57,13 @@ const useStyles = makeStyles((theme) => ({
   pageContent: {
     width: "100%",
     marginTop: theme.spacing(3),
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+
+    [theme.breakpoints.down("sm")]: {
+      padding:theme.spacing(0),
+      marginTop: theme.spacing(0),
+      width: "100%",
+    }
   },
   container: {
     width: "100%",
@@ -160,7 +166,7 @@ const Costumer: React.FunctionComponent = () => {
         </Toolbar>
         <TableContainer component={Paper} className={classes.container}>
           <Table>
-            <TableHead>
+            <TableHead >
               <TableRow>
                 <StyledTableCell>Nome</StyledTableCell>
                 <StyledTableCell>Email</StyledTableCell>
